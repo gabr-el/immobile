@@ -19,6 +19,7 @@ public class Imovel {
 	private String titulo;
 	private String descricao;
 	private String foto;
+	private int usuarioid;
 
 	public Imovel() {
 		super();
@@ -26,7 +27,7 @@ public class Imovel {
 
 	public Imovel(int id, String tipo_imovel, String cidade, String bairro, String endereco, int quantidade_quartos,
 			int quantidade_salas, int vaga_garagem, boolean piscina, int quantidade_pessoas, boolean disponivel,
-			String titulo, String descricao, String foto) {
+			String titulo, String descricao, String foto, int usuarioid) {
 		super();
 		this.id = id;
 		this.tipo_imovel = tipo_imovel;
@@ -42,6 +43,7 @@ public class Imovel {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.foto = foto;
+		this.usuarioid = usuarioid;
 	}
 
 	public Imovel(ResultSet rs) {
@@ -61,6 +63,7 @@ public class Imovel {
 			this.titulo = rs.getString("titulo");
 			this.descricao = rs.getString("descricao");
 			this.foto = rs.getString("foto");
+			this.usuarioid = rs.getInt("usuarioid");
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -179,6 +182,14 @@ public class Imovel {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+	public int getUsuarioid() {
+		return usuarioid;
+	}
+
+	public void setUsuarioid(int usuarioid) {
+		this.usuarioid = usuarioid;
+	}
 
 	@Override
 	public String toString() {
@@ -186,7 +197,7 @@ public class Imovel {
 				+ ", endereco=" + endereco + ", quantidade_quartos=" + quantidade_quartos + ", quantidade_salas="
 				+ quantidade_salas + ", vaga_garagem=" + vaga_garagem + ", piscina=" + piscina + ", quantidade_pessoas="
 				+ quantidade_pessoas + ", disponivel=" + disponivel + ", titulo=" + titulo + ", descricao=" + descricao
-				+ ", foto=" + foto + "]";
+				+ ", foto=" + foto + ", usuarioid=" + usuarioid + "]";
 	}
 
 }

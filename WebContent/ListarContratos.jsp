@@ -64,8 +64,8 @@
 		<tr>
 
 			<td><%=contrato.getDuracao_horas()%></td>
-			<td><%=contrato.getData_inicio()%></td>
-			<td><%=contrato.getData_fim()%></td>
+			<td><%=contrato.getData_inicioStr()%></td>
+			<td><%=contrato.getData_fimStr()%></td>
 			<td><%=contrato.getValor_contrato()%></td>
 			<td><%=contrato.getUsuarioid()%></td>
 			<td><%=contrato.getImovelid()%></td>

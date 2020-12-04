@@ -25,9 +25,9 @@
 	<form action="AlterarContrato.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="id" value=<%=contrato.getId()%> />
 		Duração de Horas: <input type="number" name="duracao_horas" value=<%=contrato.getDuracao_horas()%> /><br>
-		Data de Início: <input type="date" name="data_inicio" value=<%=contrato.getData_inicio()%> /><br>
-		Data Final: <input type="date" name="data_fim" value=<%=contrato.getData_fim()%> /><br>
-		Valor do Contrato: <input type="number" name="valor-contrato" value=<%=contrato.getValor_contrato()%> /><br>
+		Data de Início: <input type="date" name="data_inicio" value=<%=contrato.getData_inicioStr()%> /><br>
+		Data Final: <input type="date" name="data_fim" value=<%=contrato.getData_fimStr()%> /><br>
+		Valor do Contrato: <input type="number" name="valor_contrato" value=<%=contrato.getValor_contrato()%> /><br>
 		Identificador do Usuário: <input type="number" name="usuarioid" value=<%=contrato.getUsuarioid()%> /><br>
 		Identificador do Imovel: <input type="number" name="imovelid" value=<%=contrato.getImovelid()%> /><br>
 		  

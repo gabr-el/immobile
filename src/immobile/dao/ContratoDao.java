@@ -86,7 +86,7 @@ public class ContratoDao {
 	}
 
 	public int update(Contrato contrato) {
-		String sql = "UPDATE public.contrato SET duracao_horas =?, data_inicio=?, data_fim=?, valor_contrato=?, usuarioid=?, imovelid=?, WHERE id=?;";
+		String sql = "UPDATE public.contrato SET duracao_horas =?, data_inicio=?, data_fim=?, valor_contrato=?, usuarioid=?, imovelid=? WHERE id=?;";
 		java.sql.Date data_inicioSql = new java.sql.Date(contrato.getData_inicio().getTime());
 		java.sql.Date data_fimSql = new java.sql.Date(contrato.getData_fim().getTime());
 		try {
@@ -192,20 +192,4 @@ public class ContratoDao {
 		}
 	}
 
-	public int gravaPhoto(int id, String foto) {
-
-		String sql = "UPDATE contrato SET foto=? WHERE id =?";
-		try {
-
-			PreparedStatement stmt = connection.prepareStatement(sql);
-
-			stmt.setString(1, foto);
-			stmt.setInt(2, id);
-
-			return stmt.executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-
-		}
-	}
 }

@@ -11,11 +11,10 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<title>Lista de Usuários</title>
-
 </head>
-
 <body>
+		
+
 
 	<%
 		int linhas = 5;
@@ -34,26 +33,29 @@
 			paginaInicial = Integer.parseInt(request.getParameter("paginaInicial"));
 		}
 	%>
-
+	
 	<h1>Lista de Imoveis</h1>
 
 	<table border="2">
 
 		<tr>
-			<td>Tipo do Imovel</td>
+			<td>Tipo Imovel</td>
 			<td>Cidade</td>
 			<td>Bairro</td>
 			<td>Endereço</td>
 			<td>Quantidade de Quartos</td>
 			<td>Quantidade de Salas</td>
-			<td>Vagas de Garagem</td>
+			<td>Vaga de Garagem</td>
 			<td>Piscina</td>
 			<td>Quantidade de Pessoas</td>
 			<td>Disponível</td>
 			<td>Título</td>
 			<td>Descrição</td>
+			<td>Foto</td>
 			<td colspan="2">Opções</td>
 		</tr>
+
+	
 
 		<%
 			ImovelDao imovelDao = new ImovelDao();
@@ -67,8 +69,8 @@
 		%>
 
 		<tr>
-
-			<td><%=imovel.getTipo_imovel()%></td>
+	
+		<td><%=imovel.getTipo_imovel()%></td>
 			<td><%=imovel.getCidade()%></td>
 			<td><%=imovel.getBairro()%></td>
 			<td><%=imovel.getEndereco()%></td>
@@ -82,6 +84,7 @@
 			<td><%=imovel.getDescricao()%></td>
 			<td><img src="<%=imovel.getFoto()%>" width="200"
 				height="50" /><br></td>
+				<br><br><br><br>
 			<td><a href="AlterarImovel.jsp?id=<%=imovel.getId()%>">Alterar</a></td>
 			<td><a href="ExcluirImovel.jsp?id=<%=imovel.getId()%>">Excluir</a></td>
 		</tr>
@@ -118,7 +121,9 @@
 		<input type="submit" value="Novo Imovel" />
 
 	</form>
-
+	<br><br><br>
+	<footer style="text-align: center;"> <strong>&copy; 2020 Immobile Desenvolvido por:<br> Gilmar, José
+	Carlos & Gabriel</strong></footer>
 </body>
 
 </html>

@@ -44,8 +44,9 @@ public class AlterarImovel extends HttpServlet {
 		String titulo = request.getParameter("titulo");
 		String descricao = request.getParameter("descricao");
 		String foto = request.getParameter("foto");
+		int usuarioid = Integer.parseInt(request.getParameter("usuarioid"));
 
-		Imovel imovel = new Imovel(id, tipo_imovel, cidade, bairro, endereco, quantidade_quartos, quantidade_salas, vaga_garagem, piscina, quantidade_pessoas, disponivel, titulo, descricao, foto);
+		Imovel imovel = new Imovel(id, tipo_imovel, cidade, bairro, endereco, quantidade_quartos, quantidade_salas, vaga_garagem, piscina, quantidade_pessoas, disponivel, titulo, descricao, foto, usuarioid);
 
 		ImovelDao imovelDao = new ImovelDao();
 		imovelDao.update(imovel);

@@ -21,8 +21,9 @@
 			Piscina: <input type="text" name="piscina"/><br/>
 			Quantidade de Pessoas: <input type="number" name="quantidade_pessoas"/><br/>
 			Disponível: <input type="text" name="disponivel"/><br/>
-			Título: <input type="text" name="disponivel"/><br/>
+			Título: <input type="text" name="titulo"/><br/>
 			Descrição: <input type="text" name="descricao"/><br/>
+			Id do Usuário Proprietário: <input type="number" name="usuarioid"/><br/>
 			<input type="file" name="foto" /><br/>
 		
 		<input type="button" value="Voltar" onclick = "window.location.assign('ListarImoveis.jsp')"/>

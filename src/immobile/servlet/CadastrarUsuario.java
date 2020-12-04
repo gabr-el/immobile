@@ -2,6 +2,9 @@ package immobile.servlet;
 
 import java.io.File;
 import javax.servlet.http.Part;
+
+import org.apache.commons.mail.EmailException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -78,6 +81,20 @@ public class CadastrarUsuario extends HttpServlet {
 			}
 		}
 
+		EnviarEmail enviarEmail = new EnviarEmail();
+
+
+		try {
+			enviarEmail.enviar("Usuário cadastrado com sucesso!",
+					"Parabéns, seu usuário foi cadastrado com sucesso!<br>Login: "+login+"<br>Senha: "+senha,
+					email);
+			
+		} catch (EmailException e) {
+
+			e.printStackTrace();
+
+		}
+		
 		response.sendRedirect("ListarUsuarios.jsp");
 	}
 

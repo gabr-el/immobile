@@ -1,8 +1,6 @@
 package immobile.dao;
 
-import java.awt.Font;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +20,7 @@ public class ImovelDao {
 	}
 
 	public int insert(Imovel imovel) {
-		String sql = "INSERT INTO public.imovel (tipo_imovel, cidade, bairro, endereco, quantidade_quartos, quantidade_salas, vaga_garagem, piscina, quantidade_pessoas, disponivel, titulo, descricao, foto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO public.imovel (tipo_imovel, cidade, bairro, endereco, quantidade_quartos, quantidade_salas, vaga_garagem, piscina, quantidade_pessoas, disponivel, titulo, descricao, foto, usuarioid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 
@@ -40,6 +38,7 @@ public class ImovelDao {
 			stmt.setString(11, imovel.getTitulo());
 			stmt.setString(12, imovel.getDescricao());
 			stmt.setString(13, imovel.getFoto());
+			stmt.setInt(14, imovel.getUsuarioid());
 
 			System.out.println(stmt.toString());
 
@@ -93,7 +92,7 @@ public class ImovelDao {
 	}
 
 	public int update(Imovel imovel) {
-		String sql = "UPDATE public.imovel SET tipo_imovel=?, cidade=?, bairro=?, endereco=?, quantidade_quartos=?, quantidade_salas=?, vaga_garagem=?, piscina=?, quantidade_pessoas=?, disponivel=?, titulo=?, descricao=?, foto=? WHERE id=?;";
+		String sql = "UPDATE public.imovel SET tipo_imovel=?, cidade=?, bairro=?, endereco=?, quantidade_quartos=?, quantidade_salas=?, vaga_garagem=?, piscina=?, quantidade_pessoas=?, disponivel=?, titulo=?, descricao=?, usuarioid=? WHERE id=?;";
 
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement(sql);
@@ -109,7 +108,9 @@ public class ImovelDao {
 			stmt.setBoolean(10, imovel.getDisponivel());
 			stmt.setString(11, imovel.getTitulo());
 			stmt.setString(12, imovel.getDescricao());
-			stmt.setString(13, imovel.getFoto());
+			stmt.setInt(13, imovel.getUsuarioid());
+			stmt.setInt(14, imovel.getId());
+			
 			if (stmt.executeUpdate() > 0) {
 				return 1;
 			} else {
@@ -125,7 +126,7 @@ public class ImovelDao {
 	}
 
 	public Imovel getImovel(int id) {
-		String sql = "SELECT tipo_imovel, bairro, endereco, quantidade_quartos, quantidade_salas, garagem, piscina, quantidade_pessoas, disponivel, titulo, descricao, foto public.usuario WHERE id=?";
+		String sql = "SELECT id, tipo_imovel, cidade, bairro, endereco, quantidade_quartos, quantidade_salas, vaga_garagem, piscina, quantidade_pessoas, disponivel, titulo, descricao, foto, usuarioid from public.imovel WHERE id=?";
 
 		try {
 

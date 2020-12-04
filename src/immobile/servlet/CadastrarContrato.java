@@ -38,11 +38,19 @@ public class CadastrarContrato extends HttpServlet {
 		int imovelid = Integer.parseInt(request.getParameter("imovelid"));
 		Date data_inicio = null;
 		Date data_fim = null;
+		System.out.println(request.getParameter("data_inicio"));
+		System.out.println(request.getParameter("data_fim"));
 		try {
 			data_inicio = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_inicio"));
 			data_fim = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_fim"));
 		} catch (ParseException e) {
-			//throw e;
+			try {
+				data_inicio = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("data_inicio"));
+				data_fim = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("data_fim"));
+			} catch (ParseException e2) {
+				// throw e;
+			}
+
 		}
 
 		System.out.println("CadastrarContrato.service(" + duracao_horas + ", " + data_inicio + ", " + data_fim + ", "
@@ -59,39 +67,7 @@ public class CadastrarContrato extends HttpServlet {
 		ContratoDao contratoDao = new ContratoDao();
 		int id = contratoDao.insert(contrato);
 
-		String appPath = request.getServletContext().getRealPath("");
-
-		String savePath = appPath + File.separator + SAVE_DIR;
-
-		File fileSaveDir = new File(savePath);
-		if (!fileSaveDir.exists()) {
-			fileSaveDir.mkdir();
-		}
-		String nomeArquivo = "";
-		for (Part part : request.getParts()) {
-			nomeArquivo = extractFileName(part);
-			if (!nomeArquivo.equals("")) {
-				String fileName = "contrato_" + id + "_" + (int) (Math.random() * 10000)
-						+ nomeArquivo.substring(nomeArquivo.lastIndexOf('.'));
-				part.write(savePath + File.separator + fileName);
-
-				contratoDao.gravaPhoto(id, SAVE_DIR + "/" + fileName);
-				break;
-			}
-		}
-
 		response.sendRedirect("ListarContratos.jsp");
-	}
-
-	private String extractFileName(Part part) {
-		String contentDisp = part.getHeader("content-disposition");
-		String[] items = contentDisp.split(";");
-		for (String s : items) {
-			if (s.trim().startsWith("filename")) {
-				return s.substring(s.indexOf("=") + 2, s.length() - 1);
-			}
-		}
-		return "";
 	}
 
 }

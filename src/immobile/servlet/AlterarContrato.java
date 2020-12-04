@@ -48,7 +48,7 @@ public class AlterarContrato extends HttpServlet {
 			// throw e;
 		}
 
-		Float valor_contrato = Float.parseFloat(request.getParameter("valor_contrato"));
+		float valor_contrato = Float.parseFloat(request.getParameter("valor_contrato"));
 		int usuarioid = Integer.parseInt(request.getParameter("usuarioid"));
 		int imovelid = Integer.parseInt(request.getParameter("imovelid"));
 
@@ -59,40 +59,7 @@ public class AlterarContrato extends HttpServlet {
 		ContratoDao contratoDao = new ContratoDao();
 		contratoDao.update(contrato);
 
-		String appPath = request.getServletContext().getRealPath("");
-
-		String savePath = appPath + File.separator + SAVE_DIR;
-
-		File fileSaveDir = new File(savePath);
-		if (!fileSaveDir.exists()) {
-			fileSaveDir.mkdir();
-		}
-
-		String fileName = "";
-		String nomeArquivo = "";
-		for (Part part : request.getParts()) {
-			nomeArquivo = extractFileName(part);
-			if (!nomeArquivo.equals("")) {
-				fileName = "contrato_" + id + "_" + (int) (Math.random() * 10000)
-						+ nomeArquivo.substring(nomeArquivo.lastIndexOf('.'));
-				part.write(savePath + File.separator + fileName);
-
-				contratoDao.gravaPhoto(id, SAVE_DIR + "/" + fileName);
-				break;
-			}
-		}
-
 		response.sendRedirect("ListarContratos.jsp");
 	}
 
-	private String extractFileName(Part part) {
-		String contentDisp = part.getHeader("content-disposition");
-		String[] items = contentDisp.split(";");
-		for (String s : items) {
-			if (s.trim().startsWith("filename")) {
-				return s.substring(s.indexOf("=") + 2, s.length() - 1);
-			}
-		}
-		return "";
-	}
 }

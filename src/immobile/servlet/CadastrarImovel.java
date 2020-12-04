@@ -41,9 +41,10 @@ public class CadastrarImovel extends HttpServlet {
 		String titulo = request.getParameter("titulo");
 		String descricao = request.getParameter("descricao");
 		String foto = request.getParameter("foto");
+		int usuarioid = Integer.parseInt(request.getParameter("usuarioid"));
 
 		System.out.println(
-				"CadastrarImovel.service(" + tipo_imovel + ", " + cidade + ", " + bairro + ", " + endereco + "," + quantidade_quartos +" , " + quantidade_salas + "," + vaga_garagem + "," + piscina + "," + quantidade_pessoas + "," + disponivel + "," + titulo + "," + descricao + "," + foto + "");
+				"CadastrarImovel.service(" + tipo_imovel + ", " + cidade + ", " + bairro + ", " + endereco + "," + quantidade_quartos +" , " + quantidade_salas + "," + vaga_garagem + "," + piscina + "," + quantidade_pessoas + "," + disponivel + "," + titulo + "," + descricao + "," + foto + "," + usuarioid );
 		
 		Imovel imovel = new Imovel();
 		imovel.setTipo_imovel(tipo_imovel);
@@ -59,6 +60,7 @@ public class CadastrarImovel extends HttpServlet {
 		imovel.setTitulo(titulo);
 		imovel.setDescricao(descricao);
 		imovel.setFoto(foto);
+		imovel.setUsuarioid(usuarioid);
 
 		ImovelDao imovelDao = new ImovelDao();
 		int id = imovelDao.insert(imovel);

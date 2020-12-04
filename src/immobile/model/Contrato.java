@@ -35,13 +35,13 @@ public class Contrato {
 			this.id = rs.getInt("id");
 			this.duracao_horas = rs.getInt("duracao_horas");
 			this.data_inicio =rs.getDate("data_inicio");
-			this.data_fim = rs.getDate("date_fim");
+			this.data_fim = rs.getDate("data_fim");
 			this.valor_contrato = rs.getFloat("valor_contrato");
 			this.usuarioid = rs.getInt("usuarioid");
 			this.imovelid = rs.getInt("imovelid");
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+	
 			e.printStackTrace();
 		}
 		
@@ -66,6 +66,14 @@ public class Contrato {
 	public Date getData_inicio() {
 		return data_inicio;
 	}
+	
+	
+	public String getData_inicioStr() {
+		return (data_inicio.getDate()<10?"0":"")+data_inicio.getDate()+"/"+
+			   (data_inicio.getMonth()<9?"0":"")+(data_inicio.getMonth()+1)+"/"+
+			   (data_inicio.getYear()+1900);
+		
+	}
 
 	public void setData_inicio(Date data_inicio) {
 		this.data_inicio = data_inicio;
@@ -73,6 +81,13 @@ public class Contrato {
 
 	public Date getData_fim() {
 		return data_fim;
+	}
+	
+	public String getData_fimStr() {
+		return (data_fim.getDate()<10?"0":"")+data_fim.getDate()+"/"+
+			   (data_fim.getMonth()<9?"0":"")+(data_fim.getMonth()+1)+"/"+
+			   (data_fim.getYear()+1900);
+		
 	}
 
 	public void setData_fim(Date data_fim) {

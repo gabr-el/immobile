@@ -15,7 +15,6 @@ public class UsuarioDao {
 	private Connection connection;
 	private FileInputStream IMAGEM;
 
-
 	public UsuarioDao() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
@@ -62,7 +61,7 @@ public class UsuarioDao {
 
 	public int delete(int usuario) {
 		System.out.println("UsuarioDao.delete(" + usuario + ")");
-		
+
 		String sql = ("DELETE FROM public.usuario WHERE id = ? ");
 		try {
 
@@ -71,8 +70,7 @@ public class UsuarioDao {
 			stmt.setInt(1, usuario);
 
 			System.out.println(stmt.toString());
-			
-			
+
 			if (stmt.executeUpdate() > 0) {
 				return 1;
 
@@ -104,8 +102,6 @@ public class UsuarioDao {
 			stmt.setString(8, usuario.getSenha());
 			stmt.setString(9, usuario.getTipo());
 			stmt.setInt(10, usuario.getId());
-			
-			
 
 			if (stmt.executeUpdate() > 0) {
 				return 1;
@@ -114,7 +110,7 @@ public class UsuarioDao {
 			}
 
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -189,31 +185,86 @@ public class UsuarioDao {
 
 			if (rs.next()) {
 				totalUsuarios = rs.getInt("totalUsuarios");
-				
+
 			}
-			
+
 			return totalUsuarios;
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-			
+
 		}
 	}
-	
+
 	public int gravaPhoto(int id, String foto) {
 
 		String sql = "UPDATE usuario SET foto=? WHERE id =?";
 		try {
-		// prepared statement para inserção
-		PreparedStatement stmt = connection.prepareStatement(sql);
-		// seta os valores
-		stmt.setString(1, foto);
-		stmt.setInt(2, id);
-		// executa
-		return stmt.executeUpdate();
+			// prepared statement para inserção
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			// seta os valores
+			stmt.setString(1, foto);
+			stmt.setInt(2, id);
+			// executa
+			return stmt.executeUpdate();
 		} catch (SQLException e) {
-		throw new RuntimeException(e);
-		
+			throw new RuntimeException(e);
+
 		}
 	}
+
+	public Usuario autenticarUsuario(String login, String senha) {
+		String sql = "SELECT * FROM usuario WHERE login = ? and senha = ?";
+
+		try {
+
+			PreparedStatement stmt = connection.prepareStatement(sql);
+
+			stmt.setString(1, login);
+			stmt.setString(2, senha);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				Usuario usuario = new Usuario(rs.getInt("id"), rs.getString("nome"), rs.getString("cpf"),
+						rs.getString("endereco"), rs.getString("cidade"), rs.getString("bairro"), rs.getString("login"),
+						rs.getString("email"), rs.getString("senha"), rs.getString("tipo"), rs.getString("foto"));
+
+				return usuario;
+			} else {
+
+				return null;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+
+	}
+	public Usuario getUsuarioPorEmail(String email) {
+		String sql = "SELECT id, nome, cpf, endereco, cidade, bairro, login, email, senha, tipo, foto FROM public.usuario WHERE email=?";
+
+		try {
+
+			PreparedStatement stmt = this.connection.prepareStatement(sql);
+			stmt.setString(1, email);
+
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+
+				Usuario usuario = new Usuario(rs);
+				return usuario;
+
+			} else {
+
+				return null;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+
+		return null;
+
+	}
+
 }

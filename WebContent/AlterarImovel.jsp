@@ -30,12 +30,13 @@
 		Endereço: <input type="text" name="endereco" value=<%=imovel.getEndereco()%> /><br>
 		Quantidade de Quartos: <input type="number" name="quantidade_quartos" value=<%=imovel.getQuantidade_quartos()%> /><br>
 		Quantidade de Salas: <input type="number" name="quantidade_salas" value=<%=imovel.getQuantidade_salas()%> /><br>
-		Vagas de Garagem:<input type="number" name="vagas_garagem" value=<%=imovel.getVaga_garagem()%> /><br>
+		Vagas de Garagem:<input type="number" name="vaga_garagem" value=<%=imovel.getVaga_garagem()%> /><br>
 		Piscina:<input type="text" name="piscina" value=<%=imovel.getPiscina()%> /><br>
 		Quantidade de Pessoas: <input type="number" name="quantidade_pessoas" value=<%=imovel.getQuantidade_pessoas()%> /><br>
 		Disponível: <input type="text" name="disponivel" value=<%=imovel.getDisponivel()%> /><br>
 		Título: <input type="text" name="titulo" value=<%=imovel.getTitulo()%> /><br><img src="<%=imovel.getTitulo()%>">  
 		Descrição: <input type="text" name="descricao" value=<%=imovel.getDescricao()%> /><br>
+		Id do Prorietário do Imovel: <input type="number" name="usuarioid" value=<%=imovel.getUsuarioid()%> /><br>
 		Foto:<input type="file" name="foto" accept="Image/*"/><br>
 		<input
 			type="button" value="Voltar"
