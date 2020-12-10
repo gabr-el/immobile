@@ -1,49 +1,152 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@ page import="java.util.List"%>
 <%@ page import="immobile.model.*"%>
 <%@ page import="immobile.dao.*"%>
-
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Alterar Imóvel</title>
+<meta charset="ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<title>Atualizar Informações do Imovel</title>
 </head>
 <body>
+	<nav class="navbar  navbar-inverse" style="background-color: #000000;">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="ListarImoveis.jsp"><img src="imagem\Capturar.PNG"
+				style="height: 40px;"></a>
+			<button class="navbar-toggler" data-toggle="collapse"
+				data-target="#navbarCollapse">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
 
-	<%
-		int id = Integer.parseInt(request.getParameter("id"));
-	Imovel imovel = new Imovel();
-	ImovelDao imovelDao = new ImovelDao();
-	imovel = imovelDao.getImovel(id);
-	%>
+		<div id="navbarCollapse" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav-item"><a class="nav-link" href="AutenticarUsuario.jsp">Sair</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
-	<h1>Alterar Imovel</h1>
+	<h1>Atualização de Imóvel</h1>
+	<form action="AlterarImovel.do" method="post"
+		enctype="multipart/form-data">
 
-	<form action="AlterarImovel.do" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="id" value=<%=imovel.getId()%> />
-		Tipo do Imóvel: <input type="text" name="tipo_imovel" value=<%=imovel.getTipo_imovel()%> /><br>
-		Cidade: <input type="text" name="cidade" value=<%=imovel.getCidade()%> /><br>
-		Bairro: <input type="text" name="bairro" value=<%=imovel.getBairro()%> /><br>
-		Endereço: <input type="text" name="endereco" value=<%=imovel.getEndereco()%> /><br>
-		Quantidade de Quartos: <input type="number" name="quantidade_quartos" value=<%=imovel.getQuantidade_quartos()%> /><br>
-		Quantidade de Salas: <input type="number" name="quantidade_salas" value=<%=imovel.getQuantidade_salas()%> /><br>
-		Vagas de Garagem:<input type="number" name="vaga_garagem" value=<%=imovel.getVaga_garagem()%> /><br>
-		Piscina:<input type="text" name="piscina" value=<%=imovel.getPiscina()%> /><br>
-		Quantidade de Pessoas: <input type="number" name="quantidade_pessoas" value=<%=imovel.getQuantidade_pessoas()%> /><br>
-		Disponível: <input type="text" name="disponivel" value=<%=imovel.getDisponivel()%> /><br>
-		Título: <input type="text" name="titulo" value=<%=imovel.getTitulo()%> /><br><img src="<%=imovel.getTitulo()%>">  
-		Descrição: <input type="text" name="descricao" value=<%=imovel.getDescricao()%> /><br>
-		Id do Prorietário do Imovel: <input type="number" name="usuarioid" value=<%=imovel.getUsuarioid()%> /><br>
-		Foto:<input type="file" name="foto" accept="Image/*"/><br>
-		<input
-			type="button" value="Voltar"
-			onclick="window.location.assign('ListarImoveis.jsp')" /> 
-			<input
-			type="submit" value="Salvar" />
+		<h1>Identificação da Casa</h1>
+		<%
+                 		int id = Integer.parseInt(request.getParameter("id"));
 
+                 	                 			ImovelDao imovelDao = new ImovelDao();
+                 	                 			Imovel imovel = imovelDao.getImovel(id);
+                 	%>
+		<input type="hidden"name="id" value="<%= imovel.getId()%>"/>
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Tipo do Imóvel:</label> <input
+				class="form-control" id="exampleFormControlSelect1" type="text" name="tipo_imovel" value="<%= imovel.getTipo_imovel()%>">
+			</input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Cidade:</label>
+			<input class="form-control" id="exampleFormControlTextarea1"
+				rows="1" placeholder="R. Sifrone Cecilio dos Santos, 273" type="text" name="cidade" value="<%= imovel.getCidade()%>"></input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Bairro:</label>
+			<input class="form-control" id="exampleFormControlTextarea1"
+				rows="1" placeholder="R. Sifrone Cecilio dos Santos, 273" type="text" name="bairro" value="<%= imovel.getBairro()%>"></input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Endereço:</label>
+			<input class="form-control" id="exampleFormControlTextarea1"
+				rows="1" placeholder="R. Sifrone Cecilio dos Santos, 273" type="text" name="endereco" value="<%= imovel.getEndereco()%>"></input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Quantidade de Quartos:</label>
+			<input class="form-control" id="exampleFormControlSelect1" type="number" name="quantidade_quartos" value="<%= imovel.getQuantidade_quartos()%>">
+				
+			</input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Quantidade de Salas:</label> <input
+				class="form-control" id="exampleFormControlSelect1" type="number" name="quantidade_salas" value="<%= imovel.getQuantidade_salas()%>">
+				
+			</input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Vaga de Garagem:</label> <input
+				class="form-control" id="exampleFormControlSelect1" type="number" name="vaga_garagem" value="<%= imovel.getVaga_garagem()%>">
+			</input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Piscina?</label> <input
+				class="form-control" id="exampleFormControlSelect1" type="text" name="piscina">
+	
+			</input>
+		</div>
+		
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Quantidade de Pessoas:</label> <input
+				class="form-control" id="exampleFormControlSelect1" type="number" name="quantidade_pessoas" value="<%= imovel.getQuantidade_pessoas()%>">
+				
+			</input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlSelect1">Disponível?</label> <input
+				class="form-control" id="exampleFormControlSelect1" type="text" name="disponivel" value="<%= imovel.getDisponivel()%>">
+				
+			</input>
+		</div>
+
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Titulo:</label>
+			<input class="form-control" id="exampleFormControlTextarea1"
+				rows="1" placeholder="R. Sifrone Cecilio dos Santos, 273" type="text" name="titulo" value="<%= imovel.getTitulo()%>"></input>
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Descrição:</label>
+			<input class="form-control" id="exampleFormControlTextarea1"
+				rows="1" type="text" name="descricao" value="<%= imovel.getDescricao()%>"></input>
+		</div>
+		
+		<div class="form-group">
+			<label for="exampleFormControlTextarea1">Identificador do Usuário:</label>
+			<input class="form-control" id="exampleFormControlTextarea1"
+				rows="1" type="text" name="usuarioid" type="number" name="usuarioid" value="<%= imovel.getUsuarioid()%>"></input>
+		</div>
+		
+		<label for="exampleFormControlTextarea1">Foto:</label> <input
+			type="file" name="foto"/> <br> <br>
+
+		<div class="from-group" style="text-align: center; margin-top: 2%;">
+			<input style="margin-bottom: 2rem;" class="btn btn-primary"
+				type="submit" value="Salvar">
+		</div>
+		<div class="from-group" style="text-align: center; margin-top: 2%;">
+			<input style="margin-bottom: 2rem;" class="btn btn-primary"
+				type="submit" value="Voltar" onclick="window.location.assign('ListarImoveis.jsp')">
+				</div>
 	</form>
 
 </body>

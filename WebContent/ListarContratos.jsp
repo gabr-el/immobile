@@ -102,7 +102,7 @@
 
 	</table>
 
-	<form action="CadastrarContratos.jsp">
+	<form action="CadastrarContrato.jsp">
 		<input type="submit" value="Novo Contrato" />
 
 	</form>

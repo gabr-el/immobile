@@ -67,7 +67,7 @@ public class CadastrarContrato extends HttpServlet {
 		ContratoDao contratoDao = new ContratoDao();
 		int id = contratoDao.insert(contrato);
 
-		response.sendRedirect("ListarContratos.jsp");
+		response.sendRedirect("ListarImoveis.jsp");
 	}
 
 }

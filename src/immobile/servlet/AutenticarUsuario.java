@@ -26,7 +26,7 @@ public class AutenticarUsuario extends HttpServlet {
 			sessao.invalidate();
 		}
 		request.setAttribute("msg", "");
-		request.getRequestDispatcher("Login.jsp").forward(request, response);
+		request.getRequestDispatcher("EsqueciSenha.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +47,7 @@ public class AutenticarUsuario extends HttpServlet {
 			sessao.setAttribute("usuarioAutenticado", usuarioAutenticado);
 
 			sessao.setMaxInactiveInterval(60 * 5);
-			request.getRequestDispatcher("ListarUsuarios.jsp").forward(request, response);
+			request.getRequestDispatcher("ListarImoveis.jsp").forward(request, response);
 		} else {
 			request.setAttribute("msg", "Login ou senha invalida!");
 			request.getRequestDispatcher("AutenticarUsuario.jsp").forward(request, response);

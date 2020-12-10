@@ -26,7 +26,7 @@ import immobile.model.Usuario;
 public class CadastrarUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String SAVE_DIR = "FotosUsuarios";
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -42,9 +42,9 @@ public class CadastrarUsuario extends HttpServlet {
 		String tipo = request.getParameter("tipo");
 		String foto = request.getParameter("foto");
 
-		System.out.println(
-				"CadastrarUsuario.service(" + cpf + ", " + nome + ", " + endereco + ", " + cidade + "," + bairro +" , " + login + "," + email + "," + senha + "," + tipo + "," + foto + "");
-		
+		System.out.println("CadastrarUsuario.service(" + cpf + ", " + nome + ", " + endereco + ", " + cidade + ","
+				+ bairro + " , " + login + "," + email + "," + senha + "," + tipo + "," + foto + "");
+
 		Usuario usuario = new Usuario();
 		usuario.setCpf(cpf);
 		usuario.setNome(nome);
@@ -59,12 +59,11 @@ public class CadastrarUsuario extends HttpServlet {
 
 		UsuarioDao usuarioDao = new UsuarioDao();
 		int id = usuarioDao.insert(usuario);
-		
-		
+
 		String appPath = request.getServletContext().getRealPath("");
-		
+
 		String savePath = appPath + File.separator + SAVE_DIR;
-		
+
 		File fileSaveDir = new File(savePath);
 		if (!fileSaveDir.exists()) {
 			fileSaveDir.mkdir();
@@ -73,7 +72,8 @@ public class CadastrarUsuario extends HttpServlet {
 		for (Part part : request.getParts()) {
 			nomeArquivo = extractFileName(part);
 			if (!nomeArquivo.equals("")) {
-				String fileName = "usuario_" + id + "_" + (int)(Math.random()*10000) + nomeArquivo.substring(nomeArquivo.lastIndexOf('.'));
+				String fileName = "usuario_" + id + "_" + (int) (Math.random() * 10000)
+						+ nomeArquivo.substring(nomeArquivo.lastIndexOf('.'));
 				part.write(savePath + File.separator + fileName);
 
 				usuarioDao.gravaPhoto(id, SAVE_DIR + "/" + fileName);
@@ -83,19 +83,17 @@ public class CadastrarUsuario extends HttpServlet {
 
 		EnviarEmail enviarEmail = new EnviarEmail();
 
-
 		try {
-			enviarEmail.enviar("Usuário cadastrado com sucesso!",
-					"Parabéns, seu usuário foi cadastrado com sucesso!<br>Login: "+login+"<br>Senha: "+senha,
-					email);
-			
+			enviarEmail.enviar("Seja Bem-Vindo!", "Parabéns, seu usuário foi cadastrado com sucesso no Immobile.Com!"
+					+ " Login : " + login + " Senha : " + senha, email);
+
 		} catch (EmailException e) {
 
 			e.printStackTrace();
 
 		}
-		
-		response.sendRedirect("ListarUsuarios.jsp");
+
+		response.sendRedirect("ListarImoveis.jsp");
 	}
 
 	private String extractFileName(Part part) {
